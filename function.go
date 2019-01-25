@@ -87,9 +87,10 @@ func eventToBuild(data string) (*cloudbuild.Build, error) {
 
 // createSlackMessage creates a message from a build object.
 func createSlackMessage(build *cloudbuild.Build) slack.Payload {
+	title := "Build Logs"
 	a := slack.Attachment{
-		Title:     toPtr("Build Logs"),
-		TitleLink: toPtr(build.LogUrl),
+		Title:     &title,
+		TitleLink: &build.LogUrl,
 	}
 	a.AddField(slack.Field{
 		Title: "Status",
@@ -101,8 +102,4 @@ func createSlackMessage(build *cloudbuild.Build) slack.Payload {
 		Attachments: []slack.Attachment{a},
 	}
 	return p
-}
-
-func toPtr(s string) *string {
-	return &s
 }
