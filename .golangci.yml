@@ -1,0 +1,9 @@
+---
+linters:
+  disable:
+    - gochecknoglobals
+  presets:
+    - bugs
+    - unused
+    - format
+    - style
