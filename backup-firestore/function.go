@@ -12,6 +12,7 @@ import (
 
 var projectID string
 
+// PubSubMessage is a body data from Pub/Sub payload
 type PubSubMessage struct {
 	Data string `json:"data"`
 }
@@ -20,6 +21,7 @@ func init() {
 	projectID = os.Getenv("GCP_PROJECT")
 }
 
+// BackupFirestore is triggered by Cloud Functions
 func BackupFirestore(ctx context.Context, m PubSubMessage) error {
 	client, err := google.DefaultClient(ctx,
 		"https://www.googleapis.com/auth/datastore",
