@@ -1,4 +1,4 @@
-package gcf
+package function
 
 import (
 	"context"
