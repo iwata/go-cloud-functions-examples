@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2/google"
-	firestore "google.golang.org/api/firestore/v1beta1"
+	firestore "google.golang.org/api/firestore/v1beta2"
 )
 
 var projectID string
@@ -33,7 +33,7 @@ func BackupFirestore(ctx context.Context, m PubSubMessage) error {
 		return errors.Wrap(err, "Failed to create Firestore service")
 	}
 
-	req := &firestore.GoogleFirestoreAdminV1beta1ExportDocumentsRequest{
+	req := &firestore.GoogleFirestoreAdminV1beta2ExportDocumentsRequest{
 		OutputUriPrefix: fmt.Sprintf("gs://%s-backup-firestore", projectID),
 	}
 	_, err = firestore.NewProjectsDatabasesService(svc).ExportDocuments(
