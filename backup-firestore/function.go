@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2/google"
-	firestore "google.golang.org/api/firestore/v1"
+	"google.golang.org/api/firestore/v1"
 )
 
 var projectID string
