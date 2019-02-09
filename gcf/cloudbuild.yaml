@@ -33,7 +33,7 @@ steps:
       - -c
       - |
         gcloud beta functions deploy backup-firestore \
-          --runtime go111 --stage-bucket nomos-gcf \
+          --runtime go111 --stage-bucket ${PROJECT_ID}-gcf \
           --trigger-topic backup-firestore --entry-point BackupFirestore \
           --source ./ --region us-central1
     id: deploy-bakcup-firestore
@@ -43,7 +43,7 @@ steps:
       - -c
       - |
         gcloud beta functions deploy notify-slack \
-          --runtime go111 --stage-bucket nomos-gcf \
+          --runtime go111 --stage-bucket ${PROJECT_ID}-gcf \
           --trigger-topic cloud-builds --entry-point NotifySlack \
           --source ./ --region asia-northeast1 \
           --set-env-vars SLACK_WEBHOOK=https://slack.com/xxx
