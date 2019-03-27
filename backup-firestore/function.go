@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/pkg/errors"
-	"golang.org/x/oauth2/google"
 	"google.golang.org/api/firestore/v1"
+	"google.golang.org/api/option"
 )
 
 var projectID string
@@ -23,14 +23,7 @@ func init() {
 
 // BackupFirestore is triggered by Cloud Functions
 func BackupFirestore(ctx context.Context, m PubSubMessage) error {
-	client, err := google.DefaultClient(ctx,
-		"https://www.googleapis.com/auth/datastore",
-		"https://www.googleapis.com/auth/cloud-platform")
-	if err != nil {
-		return errors.Wrap(err, "Failed to create a Google client")
-	}
-
-	svc, err := firestore.New(client)
+	svc, err := firestore.NewService(ctx, option.WithScopes(firestore.DatastoreScope, firestore.CloudPlatformScope))
 	if err != nil {
 		return errors.Wrap(err, "Failed to create Firestore service")
 	}
